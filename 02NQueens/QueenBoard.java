@@ -4,6 +4,7 @@ public class QueenBoard{
 
   public QueenBoard(int size){
     board = new int[size][size];
+    solutionCount = -1;
   }
 
   private boolean addQueen(int r, int c){
@@ -49,11 +50,25 @@ public class QueenBoard{
   }
 
   private boolean solveH(int col){
-    return false; //change
+    int size = board.length;
+    if (col == size){ //if reach this point, it should be done
+      return true;
+    }
+    for (int row = 0; row < size; row++){
+      if (addQueen(row, col)){
+        //does it do it in the boolean?? test later
+        if (solveH(col+1)){
+          return true;
+        } else{
+          removeQueen(row, col);
+        }
+      }
+    }
+    return false;
   }
 
   public void countSolutions(){
-
+    //change solutionCount
   }
 
 /**
@@ -61,7 +76,7 @@ public class QueenBoard{
   *The board should be reset after this is run.
   */
   public int getCount(){
-    return -1; // change
+    return solutionCount; // change not sure how this works
   }
 
 /**toString
