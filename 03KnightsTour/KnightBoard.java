@@ -1,5 +1,6 @@
 public class KnightBoard{
     private int[][] board;
+    private int[][] numsMovesBoard;
 
     public KnightBoard(int startingRows, int startingCols){
 	board = new int[startingRows][startingCols];
@@ -8,9 +9,14 @@ public class KnightBoard{
 		board[r][c] = 0;
 	    }
 	}
+	//initialize the numsMovesBoard
     }
 
-    /* do i need this
+    private void updateMovesBoard(int row, int col){
+	//bod
+    }
+
+    /* do i need this, i dont think so
     private boolean addStep(int row, int col){
 	if (board[row][col] != 0){
 	    return false;
@@ -21,13 +27,28 @@ public class KnightBoard{
 
     private boolean solveH(int row, int col, int level){
 	int numRows = board.length;
-	int numCols = board[0].length;
+	int numCols = board[row].length;
 	// int[] ah = {12,-8,21,19,-19,-21,8,-12};
+	if (numMovesBoard[row][col] == 0 && level != nums * rows){ //if bad square
+	    return false;
+	}
 	
 	if (level > numRows * numCols){
 	    return true; // should be done
 	}
-	while (level <= numRows * numCols){
+        if (numMovesBoard[row][col] != 0){ //yes moves next
+	    board[row][col] = level;
+	    level++;
+	    //how to actula do the next moves
+	    if (board[row-2][col-1] != 0){ //??
+	    }
+	    if (board[row-2][col+1] != 0){}
+	    if (board[row-1][col+2] != 0){}
+	    if (board[row+1][col+2] != 0){}
+	    if (board[row+2][col+1] != 0){}
+	    if (board[row+2][col-1] != 0){}
+	    if (board[row+1][col-2] != 0){}
+	    if (board[row-1][col-2] != 0){} //also out of bounds??
 	    
 	}
 
@@ -46,8 +67,9 @@ public class KnightBoard{
 	20 21 22 23 24
         30 31 32 33 34
 	*/
+	return false;
     }
-
+ 
     public void solve(){
 	solveH(0,0,1);
     }
@@ -68,7 +90,7 @@ public class KnightBoard{
     }
 
     public static void main(String[] args){
-	Knightboard test = new Knightboard(5,5);
+	Knightboard test = new Knightboard(7,7);
 	test.solve();
 	System.out.println(test);
     }
