@@ -1,15 +1,64 @@
 public class KnightBoard{
     private int[][] board;
-    private int[][] numsMovesBoard;
+    public int[][] numMovesBoard;
 
     public KnightBoard(int startingRows, int startingCols){
 	board = new int[startingRows][startingCols];
-	for (int r = 0; r < board.length; r++){               // clear
-	    for (int c = 0; c < board[r].length; c++){
+	int numRows = board.length;
+	int numCols = board[0].length;
+	
+	for (int r = 0; r < numRows; r++){               // clear
+	    for (int c = 0; c < numCols; c++){
 		board[r][c] = 0;
 	    }
 	}
-	//initialize the numsMovesBoard
+        makeNumBoard();
+    }
+
+    public void makeNumBoard(){
+        int numRows = numMovesBoard.length;
+	int numCols = numMovesBoard[0].length;
+	for (int r = 0; r < numRows; r++){
+	    for (int c = 0; r < numCols; c++){
+		if (r == 0 || r == numRows - 1){
+		    if (c == 0 || c == numCols - 1){
+			numMovesBoard[r][c] = 2;
+		    }
+		    if (c == 1 || c == numCols - 2){
+			numMovesBoard[r][c] = 3;
+		    }
+		    else {
+			numMovesBoard[r][c] = 4;
+		    }
+		}
+		if (r == 1 || r == numRows - 2){
+		   if (c == 0 || c == numCols - 1){
+			numMovesBoard[r][c] = 3;
+		    }
+		    if (c == 1 || c == numCols - 2){
+			numMovesBoard[r][c] = 4;
+		    }
+		    else {
+			numMovesBoard[r][c] = 6;
+		    } 
+		}
+		else {
+		    if (c == 0 || c == numCols - 1){
+			numMovesBoard[r][c] = 4;
+		    }
+		    if (c == 1 || c == numCols - 2){
+			numMovesBoard[r][c] = 6;
+		    }
+		    else {
+			numMovesBoard[r][c] = 8;
+		    }
+		}
+	    }
+	}
+    }
+
+    public String retNums(){
+	return numMovesBoard.toString(); //tostring for this/
     }
 
     private void updateMovesBoard(int row, int col){
@@ -29,7 +78,7 @@ public class KnightBoard{
 	int numRows = board.length;
 	int numCols = board[row].length;
 	// int[] ah = {12,-8,21,19,-19,-21,8,-12};
-	if (numMovesBoard[row][col] == 0 && level != nums * rows){ //if bad square
+	if (numMovesBoard[row][col] == 0 && level != numRows * numCols){ //if bad square
 	    return false;
 	}
 	
@@ -90,8 +139,8 @@ public class KnightBoard{
     }
 
     public static void main(String[] args){
-	Knightboard test = new Knightboard(7,7);
-	test.solve();
-	System.out.println(test);
+	KnightBoard test = new KnightBoard(7,7);
+	test.makeNumBoard();
+        System.out.println(test.numMovesBoard);
     }
 }
