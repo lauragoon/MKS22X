@@ -2,8 +2,6 @@ import java.util.*;
 import java.io.*;
 
 public class Maze{
-
-
     private char[][]maze;
     private boolean animate;
 
@@ -21,8 +19,42 @@ public class Maze{
     */
 
     public Maze(String filename){
-        //COMPLETE CONSTRUCTOR
+	BufferedReader reader = new BufferedReader(new FileReader(filename));
+	int numRows = 0;
+	int numCols = 0;
+	while (reader.readLine() != null){
+	    numRows++;
+	    if(LineNumberReader.getLineNumber() == 1){
+		String line_uno = reader.readLine();
+		while (line_uno.length() > 0){}
+	    }
+	}
+	reader.close();
+	
+	File text_file = new File(filename);
+	Scanner in = new Scanner(text_file);
+
+	maze = new char[][];
+
+	int r = 0;
+	int c = 0;
+	while (in.hasNextLine()){
+	    String line = in.nextLine();
+	    maze[r][c] = line.substring(0,1);
+	    line = line.substring(1);
+	    c++;
+	}
     }
+    
+
+    private void wait(int millis){ //ADDED SORRY!
+         try {
+             Thread.sleep(millis);
+         }
+         catch (InterruptedException e) {
+         }
+     }
+
 
     public void setAnimate(boolean b){
 
