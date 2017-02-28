@@ -153,7 +153,7 @@ public class KnightBoard{
     public static void main(String[] args){
 	KnightBoard test = new KnightBoard(7,7);
 
-	System.out.println(test.retNums());
+	System.out.println(test.retNums()); //prints numMoveBoard
 	/*
 	test.solveFast();
         System.out.println(test);*/
