@@ -62,10 +62,4 @@ public class KnightBoard{
     return ans;
   }
 
-  public static void main(String[] args){
-      KnightBoard test = new KnightBoard(5,4);
-    test.solve();
-    System.out.println(test);
-  }
-
 }
