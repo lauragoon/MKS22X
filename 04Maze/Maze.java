@@ -2,8 +2,10 @@ import java.util.*;
 import java.io.*;
 
 public class Maze{
-    private char[][]maze;
+    private char[][] maze;
     private boolean animate;
+    private int rows;
+    private int cols;
 
     /*Constructor loads a maze text file, and sets animate to false by default.
       1. The file contains a rectangular ascii maze, made with the following 4 characters:
@@ -19,31 +21,23 @@ public class Maze{
     */
 
     public Maze(String filename){
-	BufferedReader reader = new BufferedReader(new FileReader(filename));
-	int numRows = 0;
-	int numCols = 0;
-	while (reader.readLine() != null){
-	    numRows++;
-	    if(LineNumberReader.getLineNumber() == 1){
-		String line_uno = reader.readLine();
-		while (line_uno.length() > 0){}
-	    }
-	}
-	reader.close();
-	
-	File text_file = new File(filename);
-	Scanner in = new Scanner(text_file);
-
-	maze = new char[][];
-
-	int r = 0;
-	int c = 0;
-	while (in.hasNextLine()){
+	try {
+	    Scanner in = new Scanner(new File(filename));
+	    int numRows = 1;
+	    int numCols = 0;
 	    String line = in.nextLine();
-	    maze[r][c] = line.substring(0,1);
-	    line = line.substring(1);
-	    c++;
+	    numCols = line.length();
+	    while (in.hasNextLine()){
+		numRows++;
+		in.nextLine();
+	    }
+	    maze = new char[numRows][numCols];
+	    rows = numRows;
+	    cols = numCols;
+	} catch (FileNotFoundException e){
+	    System.out.println("Error: Specified file not found.");
 	}
+	animate = false;
     }
     
 
@@ -113,5 +107,16 @@ public class Maze{
         return false; //so it compiles
     }
 
+    public String toString(){
+	String ans = "";
+	for (int r = 0; r < rows; r++){ 
+	    
+	}
+    }
+
+    public static void main(String[] args){
+	Maze test = new Maze("data1.dat");
+	System.out.println(test.toString());
+    }
 
 }
