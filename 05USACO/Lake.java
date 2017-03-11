@@ -93,11 +93,5 @@ public class Lake {
     return string;
   }
 
-  public static void main(String args[]) {
-    Lake a = new Lake("makelake.1.in");
-    //	a.stomp(1, 1, 100);
-    //	a.stomp(1, 2, 200);
-    //System.out.println(a);
-  }
 
 }
