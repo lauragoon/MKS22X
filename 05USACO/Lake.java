@@ -47,16 +47,6 @@ public class Lake {
 
       V = D * 72 * 72;
 
-      while (filename.indexOf(".") != -1 && filename.charAt(filename.length() - 1) != '.') {
-        filename = filename.substring(0, filename.length() - 1);
-      }
-      try {
-        PrintWriter fileOut = new PrintWriter(filename + ".out", "UTF-8");
-        fileOut.println(V);
-        fileOut.close();
-      }
-      catch (IOException e) { }
-
     }
     catch (FileNotFoundException e) {
       System.out.println("ERROR: File not found.");
