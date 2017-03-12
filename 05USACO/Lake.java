@@ -58,7 +58,10 @@ public class Lake {
       catch (IOException e) { }
 
     }
-    catch (FileNotFoundException e) { }
+    catch (FileNotFoundException e) {
+      System.out.println("ERROR: File not found.");
+      System.exit(1);
+    }
   }
 
   public void stomp(int R_s, int C_s, int D_s) {
@@ -92,6 +95,5 @@ public class Lake {
     }
     return string;
   }
-
 
 }
