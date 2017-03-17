@@ -18,44 +18,44 @@ public class Quick {
     int start2 = start;
     int end2 = end;
     boolean passPivot = false;
-    int newIndex = 0;
+    // int newIndex = 0;
 
-    // while (start2 != end2) {
-      for (int i = start; i < end; i++) {
-        if (i == ranInd) {
-          passPivot = true;
-        }
-        if ((data[i] < splitOn) || (data[i] == splitOn && passPivot)) {
-          work[start2] = data[i];
-          start2++;
-        }
-        if (data[i] > splitOn) {
-          work[end2] = data[i];
-          end2--;
-        }
+    // System.out.println("PIVOT :" + Integer.toString(splitOn));
+
+    for (int i = start; i < end; i++) {
+      if (i == ranInd) {
+        passPivot = true;
       }
-      work[start2] = splitOn;
-      newIndex = start2;
-    // }
+      if ((data[i] < splitOn) || (data[i] == splitOn && passPivot)) {
+        work[start2] = data[i];
+        start2++;
+        // System.out.println("CASE 1, BEG");
+        // System.out.println(toString(data));
+        // System.out.println(i);
+        // System.out.println(toString(work));
+      }
+      if (data[i] > splitOn) {
+        work[end2] = data[i];
+        end2--;
+        // System.out.println("CASE 2, END");
+        // System.out.println(toString(data));
+        // System.out.println(i);
+        // System.out.println(toString(work));
+      }
+    }
+    work[start2] = splitOn;
+    // newIndex = start2;
+    // System.out.println("ENDING IT ALL");
+    // System.out.println(start2);
+    // System.out.println(end2);
+    // System.out.println(toString(work));
 
-    // if (end-start < data.length) {
-    //   if (start > 0) {
-    //     for (int i = 0; i < start; i++) {
-    //       work[i] = data[i];
-    //     }
-    //   }
-    //   if (end < data.length) {
-    //     for (int i = end; i < data.length; i++) {
-    //       work[i] = data[i];
-    //     }
-    //   }
-    // }
-
-    for (int i = 0; i < data.length; i++) {
+    for (int i = start; i <= end; i++) {
       data[i] = work[i];
     }
 
-  return toString(data) + " on: " + Integer.toString(splitOn) + "new Index: " + Integer.toString(newIndex);
+  // return toString(data) + " on: " + Integer.toString(splitOn) + "new Index: " + Integer.toString(newIndex);
+  return start2;
   }
 /*
 public static int quickselect(int[] data, int k){
