@@ -2,10 +2,9 @@ import java.util.Random;
 
 public class Quick {
   public Quick() {
-    //bod
   }
 
-  public static String part (int[] data, int start, int end){
+  public static int part (int[] data, int start, int end){
     //-Choose a random element to be a pivot, and partition the array around it.
     //-Only partition the elements from start to end inclusive.
     //-When done returns the index of the final position of the pivot element.
@@ -54,41 +53,59 @@ public class Quick {
       data[i] = work[i];
     }
 
-  // return toString(data) + " on: " + Integer.toString(splitOn) + "new Index: " + Integer.toString(newIndex);
-  return start2;
+    // return toString(data) + " on: " + Integer.toString(splitOn) + "new Index: " + Integer.toString(newIndex);
+    return start2;
   }
-/*
-public static int quickselect(int[] data, int k){
-//return the value that is the kth smallest value of the array.
-//use your partition method to help you accomplish this.
-return quickselectH(data,k,0,data.length);
-}
 
-public static int quickselectH(int[] data, int k, int start, int end) {
-int ind = part(data,0,data.length);
-if (ind == k) {
-return data[k];
-} if (k > ind) {
-return quickselectH(data,k,start,ind-1);
-} else {
-return quickselectH(data,k,ind-1,end);
-}
-}
-*/
-public static String toString(int[] arr){
-  String ret = "[";
-  for (int i = 0; i < arr.length; i++){
-    ret += arr[i] + ", ";
+  public static int quickselect(int[] data, int k){
+    //return the value that is the kth smallest value of the array.
+    //use your partition method to help you accomplish this.
+    return quickselectH(data,k,0,data.length);
   }
-  ret += "]";
-  return ret;
-}
 
-public static void main(String[] args) {
-  // int[] test = {6,7,1,2,3,4,0,9};
-  int[] test = {999,999,999,4,1,0,3,2,999,999,999};
-  System.out.println(toString(test));
-  System.out.println(part(test,3,7));
-}
+  public static int quickselectH(int[] data, int k, int start, int end) {
+    int ind = part(data,0,data.length);
+    if (ind == k) {
+      return data[k];
+    } if (k > ind) {
+      return quickselectH(data,k,start,ind-1);
+    } else {
+      return quickselectH(data,k,ind-1,end);
+    }
+  }
+
+  public static String toString(int[] arr){
+    String ret = "[";
+    for (int i = 0; i < arr.length; i++){
+      ret += arr[i] + ", ";
+    }
+    ret += "]";
+    return ret;
+  }
+
+  public static void main(String[] args) {
+    // int[] test = {6,7,1,2,3,4,0,9};
+    // int[] test = {999,999,999,4,1,0,3,2,999,999,999};
+    // System.out.println(toString(test));
+    // System.out.println(part(test,3,7));
+    int[] ary = {2,10,15,23,0,5};
+    System.out.println(quickselect(ary,0));
+    System.out.println(0);
+    System.out.println();
+    System.out.println(quickselect(ary,1));
+    System.out.println(2);
+    System.out.println();
+    System.out.println(quickselect(ary,2));
+    System.out.println(5);
+    System.out.println();
+    System.out.println(quickselect(ary,3));
+    System.out.println(10);
+    System.out.println();
+    System.out.println(quickselect(ary,4));
+    System.out.println(15);
+    System.out.println();
+    System.out.println(quickselect(ary,5));
+    System.out.println(23);
+  }
 
 }
