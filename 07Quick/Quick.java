@@ -10,7 +10,7 @@ public class Quick {
     arr[b] = temp;
   }
 
-  public static String part (int[] data, int start, int end){
+  public static int[] part (int[] data, int start, int end){
     //-Choose a random element to be a pivot, and partition the array around it.
     //-Only partition the elements from start to end inclusive.
     //-When done returns the index of the final position of the pivot element.
@@ -20,18 +20,6 @@ public class Quick {
 
     switching(data,ranInd,start);
     int splitOn = data[start];
-    // int newIndex = 0;
-
-    /*
-    for (int i = 0; i < end; i++) {
-      if (data[i] <= splitOn) {
-        switching(data,i,newIndex);
-        newIndex++;
-      }
-    }
-    switching(data,newIndex,end);
-    return newIndex;
-    */
 
     int i = start;
     int lt = start;
@@ -57,9 +45,9 @@ public class Quick {
     ret[1] = gt;
     ret[2] = splitOn;
 
-    return toString(ret);
+    return ret;
   }
-    /*
+    /*   
   public static int quickselect(int[] data, int k){
     //return the value that is the kth smallest value of the array.
     //use your partition method to help you accomplish this.
@@ -76,19 +64,27 @@ public class Quick {
       return quickselectH(data,k,ind-1,end);
     }
   }
+    */
 
   public static void quicksort(int[] data) {
     quicksortH(data,0,data.length-1);
   }
 
   public static void quicksortH(int[] data, int left, int right) {
+      /*
     if (left < right) {
       int p = part(data,left,right);
       quicksortH(data,p+1,right);
       quicksortH(data,left,p-1);
     }
+      */
+      if (right - left > 1) {
+	  int[] indArr = part(data,left,right);
+	  quicksortH(data,left,indArr[0]);
+	  quicksortH(data,indArr[1],right);
+      }
   }
-    */
+    
    public static String toString(int[] arr){
      String ret = "[";
      for (int i = 0; i < arr.length; i++){
@@ -101,7 +97,8 @@ public class Quick {
     public static void main(String[] args) {
 	int[] test = {66,999,11,5,66,5,11,223,999,5,223,999,5,999,66};
 	System.out.println(toString(test));
-	System.out.println(part(test,0,test.length-1));
+	// System.out.println(toString(part(test,0,test.length-1)));
+	quicksort(test);
 	System.out.println(toString(test));
     }
 
