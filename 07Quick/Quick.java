@@ -10,7 +10,7 @@ public class Quick {
     arr[b] = temp;
   }
 
-  public static int part (int[] data, int start, int end){
+  public static String part (int[] data, int start, int end){
     //-Choose a random element to be a pivot, and partition the array around it.
     //-Only partition the elements from start to end inclusive.
     //-When done returns the index of the final position of the pivot element.
@@ -18,10 +18,11 @@ public class Quick {
     Random rand = new Random();
     int ranInd = rand.nextInt(end-start+1) + start;
 
-    switching(data,ranInd,end);
-    int splitOn = data[end];
-    int newIndex = 0;
+    switching(data,ranInd,start);
+    int splitOn = data[start];
+    // int newIndex = 0;
 
+    /*
     for (int i = 0; i < end; i++) {
       if (data[i] <= splitOn) {
         switching(data,i,newIndex);
@@ -30,8 +31,35 @@ public class Quick {
     }
     switching(data,newIndex,end);
     return newIndex;
-  }
+    */
 
+    int i = start;
+    int lt = start;
+    int gt = end;
+    int[] ret = new int[3];
+
+    while (i <= gt) {
+	if (data[i] == splitOn) {
+	    i++;
+	}
+	else if (data[i] < splitOn) {
+	    switching(data,i,lt);
+	    i++;
+	    lt++;
+	}
+	else {
+	    switching(data,i,gt);
+	    gt--;
+	}
+    }
+    
+    ret[0] = lt;
+    ret[1] = gt;
+    ret[2] = splitOn;
+
+    return toString(ret);
+  }
+    /*
   public static int quickselect(int[] data, int k){
     //return the value that is the kth smallest value of the array.
     //use your partition method to help you accomplish this.
@@ -60,14 +88,21 @@ public class Quick {
       quicksortH(data,left,p-1);
     }
   }
+    */
+   public static String toString(int[] arr){
+     String ret = "[";
+     for (int i = 0; i < arr.length; i++){
+       ret += arr[i] + ", ";
+     }
+     ret += "]";
+     return ret;
+   }
 
-  // public static String toString(int[] arr){
-  //   String ret = "[";
-  //   for (int i = 0; i < arr.length; i++){
-  //     ret += arr[i] + ", ";
-  //   }
-  //   ret += "]";
-  //   return ret;
-  // }
+    public static void main(String[] args) {
+	int[] test = {66,999,11,5,66,5,11,223,999,5,223,999,5,999,66};
+	System.out.println(toString(test));
+	System.out.println(part(test,0,test.length-1));
+	System.out.println(toString(test));
+    }
 
 }
