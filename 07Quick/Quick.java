@@ -47,7 +47,7 @@ public class Quick {
 
     return ret;
   }
-    /*   
+    
   public static int quickselect(int[] data, int k){
     //return the value that is the kth smallest value of the array.
     //use your partition method to help you accomplish this.
@@ -55,7 +55,7 @@ public class Quick {
   }
 
   public static int quickselectH(int[] data, int k, int start, int end) {
-    int ind = part(data,0,data.length-1);
+    int[] indArr = part(data,0,data.length-1);
     if (ind == k) {
       return data[k];
     } if (k > ind) {
@@ -64,7 +64,7 @@ public class Quick {
       return quickselectH(data,k,ind-1,end);
     }
   }
-    */
+    
 
   public static void quicksort(int[] data) {
     quicksortH(data,0,data.length-1);
@@ -95,11 +95,31 @@ public class Quick {
    }
 
     public static void main(String[] args) {
+	/*
 	int[] test = {66,999,11,5,66,5,11,223,999,5,223,999,5,999,66};
 	System.out.println(toString(test));
 	// System.out.println(toString(part(test,0,test.length-1)));
 	quicksort(test);
 	System.out.println(toString(test));
+	*/
+	 int[] ary = {2,10,15,23,0,5};
+	 System.out.println(quickselect(ary,0));
+	 System.out.println(0);
+	 System.out.println();
+	 System.out.println(quickselect(ary,1));
+	 System.out.println(2);
+	 System.out.println();
+	 System.out.println(quickselect(ary,2));
+	 System.out.println(5);
+	 System.out.println();
+	 System.out.println(quickselect(ary,3));
+	 System.out.println(10);
+	 System.out.println();
+	 System.out.println(quickselect(ary,4));
+	 System.out.println(15);
+	 System.out.println();
+	 System.out.println(quickselect(ary,5));
+	 System.out.println(23);
     }
 
 }
