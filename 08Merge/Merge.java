@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Merge {
 
     /*
@@ -40,6 +42,23 @@ public class Merge {
     }
 
     public static void mergesort(int[] ary) {
+	int half = ary.length / 2;
+	int[] left = Arrays.copyOfRange(ary,0,half);
+	int[] right = Arrays.copyOfRange(ary,half,ary.length);
+
+	if (left.length != 1)
+	
+	mergesort(left);
+	mergesort(right);
+
+	merge(left,right,ary);
+	/*
+	String ret = "";
+	ret += toString(left);
+	ret += "/////////";
+	ret += toString(right);
+	return ret;
+	*/
     }
 
     public static String toString(int[] arr) {
@@ -64,6 +83,10 @@ public class Merge {
 	// int[] dest = new int[test1.length + test2.length];
 	// merge(test1,test2,dest);
 	// System.out.println(toString(dest));
+
+	int[] test = {1,2,45,2,4,55,3,1,3342,2,3};
+	mergesort(test);
+	System.out.println(toString(test));
     }
 
 }
