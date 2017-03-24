@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class Merge {
 
@@ -46,10 +47,15 @@ public class Merge {
 	int[] left = Arrays.copyOfRange(ary,0,half);
 	int[] right = Arrays.copyOfRange(ary,half,ary.length);
 
-	if (left.length != 1)
+	if (left.length != 1) {
+	    mergesort(left);
+	}
+	if (right.length != 1) {
+	    mergesort(right);
+	}
 	
-	mergesort(left);
-	mergesort(right);
+	// mergesort(left);
+	// mergesort(right);
 
 	merge(left,right,ary);
 	/*
@@ -70,6 +76,40 @@ public class Merge {
 	return ret;
     }
 
+    public static int[] zeroToTen() {
+	Random rand = new Random();
+	ArrayList<int> def = newArrayList(0,1,2,3,4,5,6,7,8,9,10);
+	int[] ret = new int[11];
+
+	for (int i = 0; i < 11; i++) {
+	    ret[i] = rand.nextInt((10-i)-0+1)+0;
+	}
+
+	return ret;
+    }
+
+    public static int[] sameValues() {
+	Random rand = new Random();
+	int n = rand.nextInt(10000) + 1;
+
+	int[] ret = new int[n];
+	
+	Random rand2 = new Random();
+	int num = rand.nextInt(10000) + 1;
+
+	for (int i = 0; i < ret.length; i++) {
+	    ret[i] = num;
+	}
+
+	return ret;
+    }
+
+    // randominzed min to max
+    // randomized 0 to 10
+    // all same value ------------------
+    // sorted
+    // reverse sorted
+
 
     public static void main(String[] args) {
 	// int[] test1 = {1,3,5,7,9,11};
@@ -84,7 +124,8 @@ public class Merge {
 	// merge(test1,test2,dest);
 	// System.out.println(toString(dest));
 
-	int[] test = {1,2,45,2,4,55,3,1,3342,2,3};
+	int[] test = zeroToTen();
+	System.out.println(toString(test));
 	mergesort(test);
 	System.out.println(toString(test));
     }
