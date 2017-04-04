@@ -1,20 +1,59 @@
+import java.util.*;
 public class MyLinkedList {
-    private LNode start;
-    private int size;
 
-    public MyLinkedList() {
-	start = null; // extra??
-	size = 0;
-    }
-
-    private LNode getNthNode(int n) {
-	for (int i = 0; i < n; i++) {
-	    
+    private class LNode {
+	LNode prev, next;
+	int value;
+	
+	public LNode(int value) {
+	    this.value = value;
+	}
+	
+	public String toString() {
+	    String ret = "(";
+	    ret += prev.value + ")";
+	    ret += value + "(";
+	    ret += next.value + ")";
+	    return ret;
 	}
     }
 
+    private LNode head,tail;
+    private int size;
+
+    public MyLinkedList() {
+	size = 0;
+    }
+
+    public int size() {
+	return size;
+    }
+
+    private LNode getNthNode(int n) {
+	//exception
+	LNode me;
+	if (size-n < size/2) { //start at end
+	    me = tail;
+	    int i = size;
+	    while (i > n) {
+		me = me.prev;
+	    }
+	}
+	else {
+	    me = head;
+	    int i = 0;
+	    while (i < n) {
+		me = me.next;
+	    }
+	}
+	return me;
+    }
+
+
+    // --------------------------------
+
     /* adds the value to end (try adding to the front first, for testing purposes) */
-    public boolean add(int n) {
+	public boolean add(int n) {
 	LNode current = start;
 	LNode end = new LNode();
 	end.value = n;
@@ -22,21 +61,16 @@ public class MyLinkedList {
 	for (int i = 0; i < size; i++) {
 	    current = current.next;
 	}
-	    //	}
+	//	}
 	current.next = end;
 	/*
-	while (current.next != null) {
-	    current = current.next;
-	}
-	current.next = end;
+	  while (current.next != null) {
+	  current = current.next;
+	  }
+	  current.next = end;
 	*/
 	size++;
 	return true;
-    }
-
-    /* return the number of elements in the list */
-    public int size() {
-	return size;
     }
 
     /* returns a string representation of the list of n elements formatted like: 
@@ -50,23 +84,21 @@ public class MyLinkedList {
 	    ret += Integer.toString(current.value) + ", ";
 	}
 	/*
-	ret += Integer.toString(start.value) + ", ";
-	while (current.next != null) {
-	    current = current.next;
-	    ret += Integer.toString(current.value) + ", ";
-	}
+	  ret += Integer.toString(start.value) + ", ";
+	  while (current.next != null) {
+	  current = current.next;
+	  ret += Integer.toString(current.value) + ", ";
+	  }
 	*/
 	ret = ret.substring(0,ret.length()-1);
 	ret += "]";
 	return ret;
     }
 
-    /* return the value of the element at the specified index (0 based) */
     public int get(int index) {
 	return -1;
     }
 
-    /* change the value of the element at the specified index to the newValue, return the old value */
     public int set(int index, int newValue) {
 	return -1;
     }
@@ -80,8 +112,5 @@ public class MyLinkedList {
 	System.out.println(test.toString());
     }
 
-    private class LNode {
-        public int value;
-	public LNode next;
-    }
+
 }
