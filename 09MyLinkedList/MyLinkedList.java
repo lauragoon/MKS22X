@@ -10,30 +10,32 @@ public class MyLinkedList {
             this.value = value;
         }
 
-        public String toString() { //(prev)value(next) ----- TEST ME -----
+        public String toString() { // vvvvvvvvvv THIS WORKS vvvvvvvvvv
+            //(prev)value(next)
+            
             String ret = "(";
-            ret += prev.value + ")";
-            ret += value + "(";
-            ret += next.value + ")";
+            String previous;
+            String after;
+            try {
+                previous = Integer.toString(prev.value);
+            }
+            catch (NullPointerException e) {
+                previous = "";
+            }
+            try {
+                after = Integer.toString(next.value);
+            }
+            catch (NullPointerException e) {
+                after = "";
+            }
+            ret += previous + ")";
+            ret += Integer.toString(value) + "(";
+            ret += after + ")";
             return ret;
         }
-	/*
-	public static void main(String[] args) {
-	LNode a = new LNode(1);
-	LNode b = new LNode(3);
-	LNode c = new LNode(6);
-        a.next = b;
-	b.next = c;
-	b.prev = a;
-	c.prev = b;
-	System.out.println(a.toString());
-	System.out.println(b.toString());
-	System.out.println(c.toString());
-	System.out.println("hi");
-	}*/
     }
     
-    // -~-~-~-~-~-~-~-~-~-~
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
     LNode head,tail;
     int size;
@@ -48,24 +50,29 @@ public class MyLinkedList {
 
     private LNode getNthNode(int n) { // ----- TEST ME -----
 	//exception
-	LNode me;
-	if (size-n < size/2) { //start at end
-	    me = tail;
-	    int i = size;
-	    while (i > n) {
-		  me = me.prev;
-          i--;
-	    }
-	}
-	else { // start at beginning
-	    me = head;
-	    int i = 0;
-	    while (i < n) {
-		  me = me.next;
-          i++;
-	    }
-	}
-	return me;
+    try {
+        LNode me;
+        if (size-n < size/2) { //start at end
+            me = tail;
+            int i = size;
+            while (i > n) {
+              me = me.prev;
+              i--;
+            }
+        }
+        else { // start at beginning
+            me = head;
+            int i = 0;
+            while (i < n) {
+              me = me.next;
+              i++;
+            }
+        }
+        return me;
+    }
+    catch (NullPointerException e) {
+        System.out.println("INVALID INDEX");
+    }
     }
     
     // JK IDK THIS DKFJSDKLFJKLSDF
@@ -82,16 +89,16 @@ public class MyLinkedList {
 	}
     }
     
-    public void remove(LNode target) {
-	int indexRem = indexOf(target.value);
-	
-	LNode previous = getNthNode(indexRem).prev;
-	LNode after = getNthNode(indexRem).next;
-        
-        previous.next = after;
-        after.prev = previous;
-	size--;
-    }
+//    public void remove(LNode target) {
+//	int indexRem = indexOf(target.value);
+//	
+//	LNode previous = getNthNode(indexRem).prev;
+//	LNode after = getNthNode(indexRem).next;
+//        
+//        previous.next = after;
+//        after.prev = previous;
+//	size--;
+//    }
     
     public String toString() { // ----- TEST ME -----
         String ret = "[";
@@ -117,50 +124,50 @@ public class MyLinkedList {
 	return true;
     }
     
-    public int get(int index) { // ----- TEST ME -----
-        return getNthNode(index).value;
-    }
+//    public int get(int index) { // ----- TEST ME -----
+//        return getNthNode(index).value;
+//    }
     
-    public int set(int index, int value) { // ----- TEST ME -----
-        int ret = getNthNode(index).value;
-        
-        LNode me = new LNode(value);
-        me.prev = getNthNode(index).prev;
-        me.next = getNthNode(index).next;
-        getNthNode(index).prev.next = me;
-        getNthNode(index).next.prev = me;
-        
-        return ret;
-    }
+//    public int set(int index, int value) { // ----- TEST ME -----
+//        int ret = getNthNode(index).value;
+//        
+//        LNode me = new LNode(value);
+//        me.prev = getNthNode(index).prev;
+//        me.next = getNthNode(index).next;
+//        getNthNode(index).prev.next = me;
+//        getNthNode(index).next.prev = me;
+//        
+//        return ret;
+//    }
     
-    public int indexOf(int value) { // ----- TEST ME -----
-        int i = 0;
-        int ret = 0;
-        LNode me = head;
-        try {
-            while (i < size) {
-                ret = me.value;
-                me = me.next;
-                i++;
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Invalid index");
-        }
-	return ret;
-    }
+//    public int indexOf(int value) { // ----- TEST ME -----
+//        int i = 0;
+//        int ret = 0;
+//        LNode me = head;
+//        try {
+//            while (i < size) {
+//                ret = me.value;
+//                me = me.next;
+//                i++;
+//            }
+//        } catch (NullPointerException e) {
+//            System.out.println("Invalid index");
+//        }
+//	return ret;
+//    }
     
-    public int remove(int index) { // ----- TEST ME -----
-        int ret = getNthNode(index).value;
-        
-        LNode previous = getNthNode(index).prev;
-        LNode after = getNthNode(index).next;
-        
-        previous.next = after;
-        after.prev = previous;
-	size--;
-        
-        return ret;
-    }
+//    public int remove(int index) { // ----- TEST ME -----
+//        int ret = getNthNode(index).value;
+//        
+//        LNode previous = getNthNode(index).prev;
+//        LNode after = getNthNode(index).next;
+//        
+//        previous.next = after;
+//        after.prev = previous;
+//	size--;
+//        
+//        return ret;
+//    }
     
     public void add(int index, int value) { // ----- TEST ME -----
         LNode previous = getNthNode(index).prev;
@@ -179,23 +186,12 @@ public class MyLinkedList {
 
 
     public static void main(String[] args) {
-	/*
-	MyLinkedList test = new MyLinkedList();
-	test.add(1);
-	test.add(3);
-	test.add(5);
-	System.out.println(test.size());
-	*/
-	LNode a = new LNode(1);
-	LNode b = new LNode(3);
-	LNode c = new LNode(6);
-        a.next = b;
-	b.next = c;
-	b.prev = a;
-	c.prev = b;
-	System.out.println(a.toString());
-	System.out.println(b.toString());
-	System.out.println(c.toString());
+        MyLinkedList test = new MyLinkedList();
+        test.add(1);
+        test.add(3);
+        test.add(5);
+        System.out.println(test.size());
+
     }
 
 
