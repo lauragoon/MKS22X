@@ -127,13 +127,6 @@ public class MyLinkedList {
     }
     
     public boolean add(int value) { // vvvvvvvvv think this works vvvvvvvvv
-        // make value into node
-        // use add(index,value)
-	//	LNode me = new LNode(value);
-	//	tail.next = me;
-	//	me.prev = tail;
-	//	size++;
-	//	tail = me;
         try {
 	    add(size,value);
 	    return true;
@@ -143,21 +136,29 @@ public class MyLinkedList {
 	}
     }
     
-//    public int get(int index) { // ----- TEST ME -----
-//        return getNthNode(index).value;
-//    }
+    public int get(int index) { // vvvvvvvvv this works vvvvvvvvv
+        return getNthNode(index).value;
+    }
     
-//    public int set(int index, int value) { // ----- TEST ME -----
-//        int ret = getNthNode(index).value;
-//        
-//        LNode me = new LNode(value);
-//        me.prev = getNthNode(index).prev;
-//        me.next = getNthNode(index).next;
-//        getNthNode(index).prev.next = me;
-//        getNthNode(index).next.prev = me;
-//        
-//        return ret;
-//    }
+    public int set(int index, int value) { // ----- TEST ME -----
+        int ret = getNthNode(index).value; // doesnt work if index is end
+        LNode me = new LNode(value);
+
+	if (index == 0) {
+	    me.next = getNthNode(index).next);
+	}
+	else if (index == size-1) {
+	    me.prev = getNthNode(index.prev);
+	}
+	else {
+	}
+        me.prev = getNthNode(index).prev;
+        me.next = getNthNode(index).next;
+        getNthNode(index).prev.next = me;
+        getNthNode(index).next.prev = me;
+        
+        return ret;
+    }
     
 //    public int indexOf(int value) { // ----- TEST ME -----
 //        int i = 0;
@@ -245,6 +246,8 @@ public class MyLinkedList {
         test.add(3);
         test.add(5);
         System.out.println(test.size());
+	System.out.println(test.toStringDebug());
+        test.set(2,9);
 	System.out.println(test.toStringDebug());
 
     }
