@@ -1,10 +1,10 @@
 public class RunningMedian {
     private MyHeap FRONT;
     private MyHeap BACK;
-    private int MEDIAN;
+    private Integer MEDIAN;
 
     public RunningMedian() {
-	FRONT = new MyHeap();
+	FRONT = new MyHeap(); // change these to Integers
 	BACK = new MyHeap(false);
     }
 
