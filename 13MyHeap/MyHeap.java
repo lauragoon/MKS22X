@@ -8,6 +8,8 @@ public class MyHeap {
   public MyHeap() { // max heap
     heap = new ArrayList<String>();
     constant = 1;
+    size = 1;
+    heap.add(0,"n/a");
     // heap.add("");
   }
 
@@ -15,17 +17,21 @@ public class MyHeap {
     if (bool) { // max heap
       heap = new ArrayList<String>();
       constant = 1;
+      size = 1;
+      heap.add(0,"n/a");
     }
     else { // min heap
       heap = new ArrayList<String>();
       constant = -1;
+      size = 1;
+      heap.add(0,"n/a");
     }
   }
 
   public void add(String s) {
     heap.add(s);
     size++;
-    pushUp(size);
+    pushUp(size-1);
   }
 
   public String remove() {
@@ -51,6 +57,8 @@ public class MyHeap {
 
 
   private void pushUp(int index) {
+      System.out.println(size);
+      System.out.println(index);
     String a = heap.get(index);
     String b = heap.get(index * 2);
     if (!(a.compareTo(b)*constant < 0 || index == size)) {
