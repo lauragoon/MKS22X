@@ -1,50 +1,43 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class MyHeap {
   private ArrayList<String> heap;
   private int constant;
-  private int size;
 
   public MyHeap() { // max heap
     heap = new ArrayList<String>();
     constant = 1;
-    size = 1;
-    heap.add(0,"n/a");
-    // heap.add("");
+    heap.add(null);
   }
 
   public MyHeap(boolean bool) {
+    heap = new ArrayList<String>();
+    heap.add(null);
     if (bool) { // max heap
-      heap = new ArrayList<String>();
       constant = 1;
-      size = 1;
-      heap.add(0,"n/a");
     }
     else { // min heap
-      heap = new ArrayList<String>();
       constant = -1;
-      size = 1;
-      heap.add(0,"n/a");
     }
   }
 
   public void add(String s) {
     heap.add(s);
-    size++;
-    pushUp(size-1);
+    pushUp(1);
   }
 
   public String remove() {
-    String rem = heap.get(1);
-    heap.set(1,heap.get(size));
-    heap.remove(size);
+    swap(1,size());
+    String rem = heap.remove(size());
     pushDown(1);
-    size--;
     return rem;
   }
 
   public String peek() {
-    return heap.get(1);
+    if (size() > 1) {
+      return heap.get(1);
+    }
+    return null;
   }
 
   public String toString() {
@@ -55,37 +48,40 @@ public class MyHeap {
     return ret;
   }
 
+  public void swap(int a, int b) {
+    String temp = heap.get(a);
+    heap.set(a,heap.get(b));
+    heap.set(b,temp);
+  }
+
+  public int size() {
+    return heap.size() - 1;
+  }
 
   private void pushUp(int index) {
-      System.out.println(size);
-      System.out.println(index);
-    String a = heap.get(index);
-    String b = heap.get(index * 2);
-    if (!(a.compareTo(b)*constant < 0 || index == size)) {
-      String temp = heap.get(index/2);
-      heap.set(index/2,heap.get(index));
-      heap.set(index,temp);
-      pushUp(index / 2);
+    while (index > 1 && compare(heap.get(index),heap.get(index/2)) > 0) {
+      swap(index,index/2);
+      index /= 2;
     }
   }
 
   private void pushDown(int index) {
-    String a = heap.get(index);
-    String b = heap.get(index * 2);
-    if (!(a.compareTo(b)*constant < 0 || index == size)) {
-      String temp = heap.get(index*2);
-      heap.set(index*2,heap.get(index));
-      heap.set(index,temp);
-      pushDown(index * 2);
+    int biggerSide = -999;
+    while (index*2 < size() && (compare(heap.get(index),heap.get(index*2)) < 0 || compare(heap.get(index),heap.get(index*2+1)) < 0)) {
+      if (compare(heap.get(index*2),heap.get(index*2+1)) >= 0) {
+        biggerSide = index * 2;
+      }
+      else {
+        biggerSide = index*2 + 1;
+      }
+      swap(index,biggerSide);
+      index = biggerSide;
     }
   }
 
-
-  public static void main(String[] args) {
-    MyHeap test = new MyHeap();
-    test.add("a");
-    test.add("p");
-    test.add("o");
-    System.out.println(test);
+  private int compare(String a, String b) {
+    return constant * a.compareTo(b);
   }
+
+
 }
