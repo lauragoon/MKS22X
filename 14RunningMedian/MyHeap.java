@@ -34,7 +34,7 @@ public class MyHeap {
   }
 
   public Integer peek() {
-    if (size() > 1) {
+    if (size() >= 1) {
       return heap.get(1);
     }
     return null;
@@ -42,14 +42,14 @@ public class MyHeap {
 
   public String toString() {
     String ret = "";
-    for (String str : heap) {
+    for (Integer str : heap) {
       ret += str + " ";
     }
     return ret;
   }
 
   public void swap(int a, int b) {
-    String temp = heap.get(a);
+    Integer temp = heap.get(a);
     heap.set(a,heap.get(b));
     heap.set(b,temp);
   }
