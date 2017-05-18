@@ -14,6 +14,7 @@ public class Location implements Comparable<Location>{
 	this.aStar = aStar;
     }
 
+
     public int getRow() {
 	return row;
     }
