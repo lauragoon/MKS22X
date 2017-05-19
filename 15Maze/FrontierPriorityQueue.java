@@ -1,5 +1,10 @@
 public class FrontierPriorityQueue implements Frontier {
-    private PriorityQueue<Location> locations; //??
+    private Queue<Location> locations;
+    
+    public FrontierPriorityQueue() {
+        locations = new Queue<Location>();
+    }
+    
     public void add(Location loc) {
     }
 
