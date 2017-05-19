@@ -2,7 +2,7 @@ public class FrontierQueue implements Frontier {
     private Queue<Location> locations;
 
     public FrontierQueue() {
-	locations = new Queue()<Location>;
+	locations = new Queue<Location>();
     }
 
     public void add(Location loc) {
