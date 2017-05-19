@@ -1,6 +1,7 @@
 public class MazeSolver {
     private Maze board;
     private boolean animate;
+    private Frontier pioneer;
     
     public MazeSolver(String filename) {
 	this(filename,false);
@@ -16,26 +17,26 @@ public class MazeSolver {
     }
 
     public void solve(int style) {
-	Frontier pioneer;
 	if (style == 0) {
 	    //DFS
 	    pioneer = new FrontierStack();
 	}
-	else if (style == 1) {
+	if (style == 1) {
 	    // BFS
 	    pioneer = new FrontierQueue();
 	}
-	else if (style == 2) {
+	if (style == 2) {
 	    // BEST FIRST
 	    pioneer = new FrontierPriorityQueue();
 	}
-	else if (style == 3) {
+	if (style == 3) {
 	    // A*
+	    pioneer = new FrontierPriorityQueue();
 	    
 	}
-	else {
-	    // no
-	}
+// 	else {
+// 	    // no
+// 	}
     }
 
     public String toString() {
