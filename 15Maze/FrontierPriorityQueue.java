@@ -9,6 +9,7 @@ public class FrontierPriorityQueue implements Frontier {
     }
 
     public Location next() {
+        locations.remove();
     }
 }
 
