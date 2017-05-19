@@ -2,7 +2,7 @@ public class FrontierStack implements Frontier {
     private Stack<Location> locations;
 
     public FrontierStack() {
-	locations = new Stack()<Location>;
+	locations = new Stack<Location>();
     }
     
     public void add(Location loc) {
