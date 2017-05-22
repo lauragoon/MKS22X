@@ -59,17 +59,18 @@ public class MazeSolver {
      int[] values = {1,0,-1,0,0,1,0,-1};
      for (int i = 0; i < 8; i += 2) {
        if (board.get(loc.getRow() + values[i], loc.getCol() + values[i+1]) != '.' && board.get(loc.getRow() + values[i], loc.getCol() + values[i+1]) != '#') {
-         pioneer.add(toLoc(loc.getRow() + values[i], loc.getCol() + values[i+1], loc, aStar));
+         Location adding = new Location(loc.getRow() + values[i], 
+                                        loc.getCol() + values[i+1], 
+                                        loc, 
+                                        getDist(loc.getRow() + values[i], loc.getCol() + values[i+1], board.getStart()),
+                                        getDist(loc.getRow() + values[i], loc.getCol() + values[i+1], board.getEnd()),
+                                        aStar);
        }
      }
   }
 
   private int getDist(int r, int c, Location loc) {
     return Math.abs(r - loc.getRow()) + Math.abs(c - loc.getCol());
-  }
-
-  private Location toLoc(int r, int c, Location loc, boolean aStar) {
-    return new Location(r,c,loc,getDist(r,c,board.getStart()), getDist(r,c,board.getEnd()),aStar);
   }
 
   public static void main(String[] args) {
