@@ -1,15 +1,19 @@
 public class FrontierPriorityQueue implements Frontier {
-    private Queue<Location> locations;
-    
-    public FrontierPriorityQueue() {
-        locations = new Queue<Location>();
-    }
-    
-    public void add(Location loc) {
-    }
+  private MyHeap locations;
 
-    public Location next() {
-        locations.remove();
-    }
+  public FrontierPriorityQueue() {
+    locations = new MyHeap();
+  }
+
+  public void add(Location loc) {
+    locations.add(loc);
+  }
+
+  public Location next() {
+    return locations.remove();
+  }
+
+  public int size() {
+    return locations.size();
+  }
 }
-

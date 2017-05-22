@@ -1,50 +1,51 @@
 public class Location implements Comparable<Location>{
-    private int row, col;
-    private int distToGoal;
-    private int distToStart;
-    private Location previous;
-    private boolean aStar;
+  private int row, col;
+  private int distToGoal, distToStart;
+  private Location previous;
+  private boolean aStar;
 
-    public Location(int r, int c, Location previous, int distToStart, int distToGoal, boolean aStar) {
-	row = r;
-	col = c;
-	this.previous = previous;
-	this.distToStart = distToStart;
-	this.distToGoal = distToGoal;
-	this.aStar = aStar;
-    }
+  public Location(int r, int c, Location previous, int distToStart, int distToGoal, boolean aStar) {
+    row = r;
+    col = c;
+    this.previous = previous;
+    this.distToStart = distToStart;
+    this.distToGoal = distToGoal;
+    this.aStar = aStar;
+  }
+
+  public Location() {}
 
 
-    public int getRow() {
-	return row;
-    }
-    
-    public int getCol() {
-	return col;
-    }
+  public int getRow() {
+    return row;
+  }
 
-    public int getToGoal() {
-	return distToGoal;
-    }
-    
-    public int getToStart() {
-	return distToStart;
-    }
+  public int getCol() {
+    return col;
+  }
 
-    public Location getPrevious() {
-    	return previous;
-    }
-	
-    public boolean getAStar() {
-    	return aStar;
-    }
+  public int getToGoal() {
+    return distToGoal;
+  }
 
-    public int CompareTo(Location other) {
-	if (aStar) {
-	    return (distToStart + distToGoal) - (other.distToStart + other.distToGoal);
-	}
-	else {
-	    return distToGoal - other.distToGoal;
-	}
+  public int getToStart() {
+    return distToStart;
+  }
+
+  public Location getPrevious() {
+    return previous;
+  }
+
+  public boolean getAStar() {
+    return aStar;
+  }
+
+  public int compareTo(Location other) {
+    if (aStar) {
+      return (distToStart + distToGoal) - (other.distToStart + other.distToGoal);
     }
+    else {
+      return distToGoal - other.distToGoal;
+    }
+  }
 }

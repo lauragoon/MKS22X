@@ -1,5 +1,4 @@
 import java.io.*;
-import java.io.FileNotFoundException;
 import java.util.*;
 public class Maze{
 
@@ -49,8 +48,8 @@ public class Maze{
     for(int r=0; r<maze.length;r++){
       for(int c=0; c<maze[r].length;c++){
         if(maze[r][c]=='S'){
-           //erase the S
-           maze[r][c]=' ';
+          //erase the S
+          maze[r][c]=' ';
           if(startr == -1){
             startr=r;
             startc=c;
@@ -61,7 +60,7 @@ public class Maze{
         }
 
         if(maze[r][c]=='E'){
-           maze[r][c]=' ';
+          maze[r][c]=' ';
           if(endr == -1){
             endr=r;
             endc=c;

@@ -1,16 +1,21 @@
+import java.util.ArrayDeque;
+
 public class FrontierQueue implements Frontier {
-    private Queue<Location> locations;
+  private ArrayDeque<Location> locations;
 
-    public FrontierQueue() {
-	locations = new Queue<Location>();
-    }
+  public FrontierQueue() {
+    locations = new ArrayDeque<Location>();
+  }
 
-    public void add(Location loc) {
-	locations.add(loc);
-    }
+  public void add(Location loc) {
+    locations.add(loc);
+  }
 
-    public Location next() {
-	locations.remove();
-    }
+  public Location next() {
+    return locations.remove();
+  }
+
+  public int size() {
+    return locations.size();
+  }
 }
-
