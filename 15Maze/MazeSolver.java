@@ -48,8 +48,7 @@ public class MazeSolver {
     // 	    // no
     // 	}
     Location cur = board.getStart();
-    // while (pioneer.size() == 0 || Math.abs(pioneer.next().compareTo(board.getEnd())) > 0) {
-    while(pioneer.next().compareTo(board.getEnd()) != 0) { //
+     while (pioneer.size() == 0 || Math.abs(pioneer.next().compareTo(board.getEnd())) > 0) {
       newSearching(cur, aStar);
       board.set(cur.getRow(), cur.getCol(), '.');
       cur = pioneer.next();
@@ -57,24 +56,12 @@ public class MazeSolver {
   }
 
   private void newSearching(Location loc, boolean aStar) {
-    // int[] values = {1,0,-1,0,0,1,0,-1};
-    // for (int i = 0; i < 8; i += 2) {
-    //   if (board.get(loc.getRow() + values[i], loc.getCol() + values[i+1]) != '.' && board.get(loc.getRow() + values[i], loc.getCol() + values[i+1]) != '#') {
-    //     pioneer.add(toLoc(loc.getRow() + values[i], loc.getCol() + values[i+1], loc, aStar));
-    //   }
-    // }
-    if(board.get(loc.getRow() + 1, loc.getCol()) != '.' && board.get(loc.getRow() + 1, loc.getCol()) != '#'){
-            pioneer.add(toLoc(loc.getRow() + 1, loc.getCol(), loc, aStar));
-        }
-        if(board.get(loc.getRow() - 1, loc.getCol()) != '.' && board.get(loc.getRow() - 1, loc.getCol()) != '#'){
-            pioneer.add(toLoc(loc.getRow() - 1, loc.getCol(), loc, aStar));
-        }
-        if(board.get(loc.getRow(), loc.getCol() + 1) != '.' && board.get(loc.getRow(), loc.getCol() + 1) != '#'){
-            pioneer.add(toLoc(loc.getRow(), loc.getCol() + 1, loc, aStar));
-        }
-        if(board.get(loc.getRow(), loc.getCol() - 1) != '.' && board.get(loc.getRow(), loc.getCol() - 1) != '#'){
-            pioneer.add(toLoc(loc.getRow(), loc.getCol() - 1, loc, aStar));
-        }
+     int[] values = {1,0,-1,0,0,1,0,-1};
+     for (int i = 0; i < 8; i += 2) {
+       if (board.get(loc.getRow() + values[i], loc.getCol() + values[i+1]) != '.' && board.get(loc.getRow() + values[i], loc.getCol() + values[i+1]) != '#') {
+         pioneer.add(toLoc(loc.getRow() + values[i], loc.getCol() + values[i+1], loc, aStar));
+       }
+     }
   }
 
   private int getDist(int r, int c, Location loc) {
@@ -87,11 +74,11 @@ public class MazeSolver {
 
   public static void main(String[] args) {
     String filename = args[0];
-    int solveMethod = Integer.parseInt(args[1]);
+    int method = Integer.parseInt(args[1]);
     MazeSolver solver = new MazeSolver(filename);
     System.out.println(solver.board);
     System.out.println(solver.pioneer);
     System.out.println(solver.board.getStart().compareTo(solver.board.getEnd()));
-    solver.solve(solveMethod);
+    solver.solve(method);
   }
 }
