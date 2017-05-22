@@ -65,6 +65,7 @@ public class MazeSolver {
                                         getDist(loc.getRow() + values[i], loc.getCol() + values[i+1], board.getStart()),
                                         getDist(loc.getRow() + values[i], loc.getCol() + values[i+1], board.getEnd()),
                                         aStar);
+         pioneer.add(adding);
        }
      }
   }
