@@ -47,11 +47,18 @@ public class MazeSolver {
     // 	else {
     // 	    // no
     // 	}
-    Location cur = board.getStart();
-     while (pioneer.size() == 0 || Math.abs(pioneer.next().compareTo(board.getEnd())) > 0) {
-      newSearching(cur, aStar);
-      board.set(cur.getRow(), cur.getCol(), '.');
-      cur = pioneer.next();
+
+    // Location cur = board.getStart();
+    //  while (pioneer.size() == 0 || Math.abs(pioneer.next().compareTo(board.getEnd())) > 0) {
+    //   newSearching(cur, aStar);
+    //   board.set(cur.getRow(), cur.getCol(), '.');
+    //   cur = pioneer.next();
+    // }
+
+    pioneer.add(board.getStart());
+    while (pioneer.size() > 0) {
+      // see if done
+      
     }
   }
 
@@ -59,9 +66,9 @@ public class MazeSolver {
      int[] values = {1,0,-1,0,0,1,0,-1};
      for (int i = 0; i < 8; i += 2) {
        if (board.get(loc.getRow() + values[i], loc.getCol() + values[i+1]) != '.' && board.get(loc.getRow() + values[i], loc.getCol() + values[i+1]) != '#') {
-         Location adding = new Location(loc.getRow() + values[i], 
-                                        loc.getCol() + values[i+1], 
-                                        loc, 
+         Location adding = new Location(loc.getRow() + values[i],
+                                        loc.getCol() + values[i+1],
+                                        loc,
                                         getDist(loc.getRow() + values[i], loc.getCol() + values[i+1], board.getStart()),
                                         getDist(loc.getRow() + values[i], loc.getCol() + values[i+1], board.getEnd()),
                                         aStar);
