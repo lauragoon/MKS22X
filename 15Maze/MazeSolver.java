@@ -24,7 +24,8 @@ public class MazeSolver {
   }
 
   public void solve(int style) {
-    boolean aStar = false;
+    // boolean aStar = false;
+    boolean solved = false;
 
     if (style == 0) {
       //DFS
@@ -41,7 +42,7 @@ public class MazeSolver {
     else if (style == 3) {
       // A*
       pioneer = new FrontierPriorityQueue();
-      aStar = true;
+      // aStar = true;
 
     }
     // 	else {
@@ -58,7 +59,14 @@ public class MazeSolver {
     pioneer.add(board.getStart());
     while (pioneer.size() > 0) {
       // see if done
-      
+      if (animate) {
+        System.out.println(board.toString(110));
+      }
+      Location next = front.next();
+      if (next.getToGoal() == 0) {
+        solved = true;
+        // stuff
+      }
     }
   }
 
