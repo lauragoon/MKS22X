@@ -52,12 +52,12 @@ public class MyDeque {
     }
     String ret = data[head];
     size--;
-    if (size == 1) {
+    if (data.length - 1 == head) {
       head = 0;
-      tail = 0;
-      return ret;
     }
-    head = Math.floorMod(head + 1, data.length);
+    else {
+      head++;
+    }
     return ret;
   }
 
@@ -67,12 +67,13 @@ public class MyDeque {
     }
     String ret = data[tail];
     size--;
-    if (size == 1) {
-      head = 0;
-      tail = 0;
-      return ret;
+    data[tail] = null;
+    if (tail == 0) {
+      tail = data.length - 1;
     }
-    tail = Math.floorMod(tail - 1, data.length);
+    else {
+      tail--;
+    }
     return ret;
   }
 
