@@ -43,6 +43,9 @@ public class Merge {
   }
 
   public static void mergesort(int[] ary) {
+    if (ary.length == 0) {
+      return;
+    }
     int half = ary.length / 2;
     int[] left = Arrays.copyOfRange(ary,0,half);
     int[] right = Arrays.copyOfRange(ary,half,ary.length);
@@ -56,15 +59,5 @@ public class Merge {
 
     merge(left,right,ary);
   }
-
-  // public static String toString(int[] arr) {
-  //   String ret = "[";
-  //   for (int i = 0; i < arr.length; i++){
-  //     ret += arr[i] + ", ";
-  //   }
-  //   ret += "]";
-  //   return ret;
-  // }
-
 
 }
