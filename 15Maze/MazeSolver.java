@@ -20,6 +20,10 @@ public class MazeSolver {
     return board.toString();
   }
 
+  public String toString(int n) {
+    return board.toString(n);
+  }
+
   public void solve() {
     solve(1);
   }
@@ -128,9 +132,9 @@ public class MazeSolver {
   //   return Math.abs(r - loc.getRow()) + Math.abs(c - loc.getCol());
   // }
 
-  // public static void main(String[] args) {
-  //   MazeSolver test = new MazeSolver("data2.dat",true);
-  //   test.solve(0);
-  //   System.out.println(test);
-  // }
+  public static void main(String[] args) {
+    MazeSolver test = new MazeSolver("data2.dat");
+    test.solve(0);
+    String ans = test.toString();
+  }
 }
