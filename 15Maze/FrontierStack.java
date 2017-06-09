@@ -15,6 +15,10 @@ public class FrontierStack implements Frontier {
     return locations.pop();
   }
 
+  // private Location get(int ind) {
+  //   System.out.println("HI");
+  // }
+
   public int size() {
     return locations.size();
   }

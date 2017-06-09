@@ -5,9 +5,10 @@ public class MazeSolver {
   private Maze board;
   private boolean animate;
   private Frontier pioneer;
+  private boolean aStar;
 
   public MazeSolver(String filename) {
-    this(filename, false);
+    this(filename, false); // false
   }
 
   public MazeSolver(String filename, boolean animate) {
@@ -24,8 +25,8 @@ public class MazeSolver {
   }
 
   public void solve(int style) {
-    // boolean aStar = false;
-    boolean solved = false;
+    boolean aStar = false;
+    // boolean solved = false;
 
     if (style == 0) {
       //DFS
@@ -36,66 +37,100 @@ public class MazeSolver {
       pioneer = new FrontierQueue();
     }
     else if (style == 2) {
-      // BEST FIRST
+      // BEST
       pioneer = new FrontierPriorityQueue();
     }
     else if (style == 3) {
       // A*
       pioneer = new FrontierPriorityQueue();
-      // aStar = true;
-
+      aStar = true;
     }
-    // 	else {
-    // 	    // no
-    // 	}
+    else {
+      throw new IllegalArgumentException("Invalid input: style 0-3");
+    }
 
-    // Location cur = board.getStart();
-    //  while (pioneer.size() == 0 || Math.abs(pioneer.next().compareTo(board.getEnd())) > 0) {
-    //   newSearching(cur, aStar);
-    //   board.set(cur.getRow(), cur.getCol(), '.');
-    //   cur = pioneer.next();
-    // }
+    // System.out.println(pioneer.size());
+    // System.out.println(pioneer.get(0));
 
     pioneer.add(board.getStart());
+    // System.out.println(pioneer.size());
+
+    Location nextLoc;
+    int curRow, curCol;
+    int[] direction = {-1, 1};
+    // System.out.println(pioneer.size());
     while (pioneer.size() > 0) {
-      // see if done
+
       if (animate) {
-        System.out.println(board.toString(110));
+        System.out.println(board.toString(100));
       }
-      Location next = front.next();
-      if (next.getToGoal() == 0) {
-        solved = true;
-        // stuff
+      // System.out.println(pioneer.size());
+      nextLoc = pioneer.next();
+      curRow = nextLoc.getRow();
+      curCol = nextLoc.getCol();
+
+      // System.out.println("hi:()");
+
+      if (nextLoc.getToGoal() == 0) {
+        newSearching(nextLoc);
+        return;
       }
+      else {
+        board.set(curRow,curCol,'.');
+      }
+
+      for (int num : direction) {
+        int rowStartDist = Math.abs(board.getStart().getRow() - (curRow + num)) + Math.abs(board.getStart().getCol() - curCol);
+        int rowEndDist = Math.abs(board.getEnd().getRow() - (curRow + num)) + Math.abs(board.getEnd().getCol() - curCol);
+        int colStartDist = Math.abs(board.getStart().getRow() - curRow) + Math.abs(board.getStart().getCol() - (curCol + num));
+        int colEndDist = Math.abs(board.getEnd().getRow() - curRow) + Math.abs(board.getEnd().getCol() - (curCol + num));
+
+        if (board.get(curRow + num, curCol) != '@' && board.get(curRow + num, curCol) != '.' && board.get(curRow + num, curCol) != '#') {
+          pioneer.add(new Location(curRow + num, curCol, nextLoc, rowStartDist, rowEndDist, aStar));
+          board.set(curRow + num, curCol, '?');
+        }
+        if (board.get(curRow, curCol + num) != '@' && board.get(curRow, curCol + num) != '.' && board.get(curRow, curCol + num) != '#') {
+          pioneer.add(new Location(curRow, curCol + num, nextLoc, colStartDist, colEndDist, aStar));
+          board.set(curRow, curCol + num, '?');
+        }
+      }
+
+    }
+
+
+  }
+
+  private void newSearching(Location loc) {
+    Location me;
+    int row, col;
+    row = loc.getRow();
+    col = loc.getCol();
+    board.set(row,col,'E');
+    me = loc.getPrevious();
+
+    while (me.getToStart() > 0) { // or !=
+      if (animate) {
+        System.out.println(board.toString(50));
+      }
+      row = me.getRow();
+      col = me.getCol();
+      board.set(row,col,'@');
+      me = me.getPrevious();
+    }
+    board.set(me.getRow(), me.getCol(), 'S');
+    if (animate) {
+      System.out.println(board.toString(50));
     }
   }
 
-  private void newSearching(Location loc, boolean aStar) {
-     int[] values = {1,0,-1,0,0,1,0,-1};
-     for (int i = 0; i < 8; i += 2) {
-       if (board.get(loc.getRow() + values[i], loc.getCol() + values[i+1]) != '.' && board.get(loc.getRow() + values[i], loc.getCol() + values[i+1]) != '#') {
-         Location adding = new Location(loc.getRow() + values[i],
-                                        loc.getCol() + values[i+1],
-                                        loc,
-                                        getDist(loc.getRow() + values[i], loc.getCol() + values[i+1], board.getStart()),
-                                        getDist(loc.getRow() + values[i], loc.getCol() + values[i+1], board.getEnd()),
-                                        aStar);
-         pioneer.add(adding);
-       }
-     }
-  }
 
-  private int getDist(int r, int c, Location loc) {
-    return Math.abs(r - loc.getRow()) + Math.abs(c - loc.getCol());
-  }
+  // private int getDist(int r, int c, Location loc) {
+  //   return Math.abs(r - loc.getRow()) + Math.abs(c - loc.getCol());
+  // }
 
-  public static void main(String[] args) {
-    String filename = args[0];
-    int method = Integer.parseInt(args[1]);
-    MazeSolver solver = new MazeSolver(filename);
-    System.out.println(solver.board);
-    System.out.println(solver.pioneer);
-    System.out.println(solver.board.getStart().compareTo(solver.board.getEnd()));
-    solver.solve(method);
-  }
+  // public static void main(String[] args) {
+  //   MazeSolver test = new MazeSolver("data2.dat",true);
+  //   test.solve(0);
+  //   System.out.println(test);
+  // }
 }

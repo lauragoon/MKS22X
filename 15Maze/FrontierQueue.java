@@ -1,4 +1,4 @@
-import java.util.ArrayDeque;
+import java.util.*;
 
 public class FrontierQueue implements Frontier {
   private ArrayDeque<Location> locations;
@@ -11,8 +11,17 @@ public class FrontierQueue implements Frontier {
     locations.add(loc);
   }
 
+  // private Location get(int ind) {
+  //   System.out.println("HI");
+  // }
+
   public Location next() {
-    return locations.remove();
+    try {
+      return locations.remove();
+    }
+    catch (NoSuchElementException e) {
+      throw new NoSuchElementException("No elements");
+    }
   }
 
   public int size() {

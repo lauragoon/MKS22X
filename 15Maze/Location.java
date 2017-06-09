@@ -42,10 +42,11 @@ public class Location implements Comparable<Location>{
 
   public int compareTo(Location other) {
     if (aStar) {
-      return (distToStart + distToGoal) - (other.distToStart + other.distToGoal);
+      return (distToStart + distToGoal) - (other.getToStart() + other.getToGoal());
     }
     else {
-      return distToGoal - other.distToGoal;
+      return distToGoal - other.getToGoal();
     }
   }
+
 }
